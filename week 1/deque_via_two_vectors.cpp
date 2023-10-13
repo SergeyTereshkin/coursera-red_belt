@@ -21,18 +21,16 @@ public:
 
     T& operator[](size_t index) {
         if (index < pushf.size()) {
-            auto itr = pushf.end() - index - 1;
-            return *itr;
+            return pushf[pushf.size() - index - 1];
         }
         return pushb[index - pushf.size()];
     }
 
     const T& operator[](size_t index) const {
-        if (index <= pushf.size()) {
-            auto itr = pushf.end() - index;
-            return *itr;
+        if (index < pushf.size()) {
+            return pushf[pushf.size() - index - 1];
         }
-        return pushb[pushb.size() + pushf.size() - index];
+        return pushb[index - pushf.size()];
     }
 
     T& At(size_t index) {
@@ -40,8 +38,7 @@ public:
             throw out_of_range("index is greater than the deque's size");
         }
         else if (index < pushf.size()) {
-            auto itr = pushf.end() - index - 1;
-            return *itr;
+            return pushf[pushf.size() - 1 - index];
         }
         else {
             return pushb[index - pushf.size()];
@@ -53,8 +50,7 @@ public:
             throw out_of_range("index is greater than the deque's size");
         }
         else if (index < pushf.size()) {
-            auto itr = pushf.end() - index - 1;
-            return *itr;
+            return pushf[pushf.size() - 1 - index];
         }
         else {
             return pushb[index - pushf.size()];
